@@ -1,0 +1,23 @@
+{
+  "modelo": "Chronographe Noir",
+  "marca": "Atelier Kessler",
+  "preco": 72500,
+  "status": "disponivel",
+  "etiqueta": "",
+  "ordem": 2,
+  "fotos": [
+    "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=1200&q=80"
+  ],
+  "descricao_pt": "Cronógrafo de mostrador negro com pulseira de aço integrada. Presença marcante no pulso, acabamento escovado e polido.",
+  "descricao_en": "Black-dial chronograph on an integrated steel bracelet. Bold wrist presence with brushed and polished finishing.",
+  "referencia": "AK-CH-07",
+  "ano": "2019",
+  "diametro": 42,
+  "material": "aco",
+  "movimento": "automatico",
+  "pulseira": "aco",
+  "estado": "muito-bom",
+  "acompanha": ["caixa"]
+}

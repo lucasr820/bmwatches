@@ -1,0 +1,22 @@
+{
+  "url": "https://www.bmjapanwatches.com.br",
+  "whatsapp": "",
+  "instagram": "",
+  "descricao_pt": "Relógios de luxo importados do Japão. Originais, selecionados e com procedência.",
+  "descricao_en": "Luxury watches imported from Japan. Authentic, hand-picked and with full provenance.",
+  "hero": {
+    "imagem": "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1600&q=80",
+    "etiqueta_pt": "Importados diretamente do Japão",
+    "etiqueta_en": "Imported directly from Japan",
+    "titulo_pt": "O tempo,\n*em sua forma*\nmais pura.",
+    "titulo_en": "Time,\n*in its purest*\nform.",
+    "texto_pt": "Relógios de luxo selecionados no mercado japonês, conhecido pela conservação impecável, e entregues no Brasil com procedência.",
+    "texto_en": "Luxury watches hand-picked in the Japanese market, renowned for impeccable condition, and delivered to Brazil with full provenance."
+  },
+  "diferenciais": [
+    { "valor_pt": "JP → BR", "valor_en": "JP → BR", "rotulo_pt": "Importação direta", "rotulo_en": "Direct import" },
+    { "valor_pt": "100%", "valor_en": "100%", "rotulo_pt": "Originais verificados", "rotulo_en": "Verified authentic" },
+    { "valor_pt": "A+", "valor_en": "A+", "rotulo_pt": "Estado de conservação", "rotulo_en": "Condition grade" },
+    { "valor_pt": "Rastreado", "valor_en": "Tracked", "rotulo_pt": "Envio com seguro", "rotulo_en": "Insured shipping" }
+  ]
+}

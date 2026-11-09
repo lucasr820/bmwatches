@@ -1,0 +1,198 @@
+# ==========================================================
+# Painel de administração — Pages CMS (https://app.pagescms.org)
+# Define o que pode ser editado pelo painel, sem mexer em código.
+# Cada "Salvar" no painel vira um commit no GitHub, e o AWS Amplify
+# publica o site atualizado automaticamente.
+# ==========================================================
+
+# Onde ficam as fotos enviadas pelo painel
+media:
+  input: public/midia
+  output: /midia
+  rename: safe
+
+content:
+  # ---------------- Relógios (um arquivo por peça) ----------------
+  - name: relogios
+    label: Relógios
+    type: collection
+    path: content/relogios
+    format: json
+    filename: "{marca}-{modelo}.json"
+    view:
+      primary: modelo
+      fields: [modelo, marca, status, preco]
+    fields:
+      - name: modelo
+        label: Modelo
+        type: string
+        required: true
+      - name: marca
+        label: Marca
+        type: string
+        required: true
+      - name: preco
+        label: Preço (R$, só números)
+        type: number
+        required: true
+      - name: status
+        label: Status
+        type: select
+        default: disponivel
+        options:
+          values:
+            - { name: disponivel, label: Disponível }
+            - { name: reservado, label: Reservado }
+            - { name: vendido, label: Vendido }
+      - name: etiqueta
+        label: Etiqueta (aparece só em peças disponíveis)
+        type: select
+        options:
+          values:
+            - { name: novo, label: Novo }
+            - { name: edicao-limitada, label: Edição Limitada }
+            - { name: raro, label: Raro }
+            - { name: ultima-unidade, label: Última unidade }
+      - name: ordem
+        label: Ordem na vitrine (1 aparece primeiro)
+        type: number
+      - name: fotos
+        label: Fotos (a primeira é a capa)
+        type: image
+        required: true
+        options:
+          multiple:
+            max: 8
+          extensions: [jpg, jpeg, png, webp]
+      - name: descricao_pt
+        label: Descrição (português)
+        type: text
+      - name: descricao_en
+        label: Descrição (inglês — se vazio, usa o português)
+        type: text
+      - name: referencia
+        label: Referência
+        type: string
+      - name: ano
+        label: Ano
+        type: string
+      - name: diametro
+        label: Diâmetro da caixa (mm)
+        type: number
+      - name: material
+        label: Material da caixa
+        type: select
+        options:
+          values:
+            - { name: aco, label: Aço inoxidável }
+            - { name: ouro, label: Ouro }
+            - { name: ouro-rose, label: Ouro rosé }
+            - { name: titanio, label: Titânio }
+            - { name: ceramica, label: Cerâmica }
+            - { name: platina, label: Platina }
+      - name: movimento
+        label: Movimento
+        type: select
+        options:
+          values:
+            - { name: automatico, label: Automático }
+            - { name: manual, label: Corda manual }
+            - { name: quartzo, label: Quartzo }
+            - { name: spring-drive, label: Spring Drive }
+            - { name: solar, label: Solar }
+      - name: pulseira
+        label: Pulseira
+        type: select
+        options:
+          values:
+            - { name: aco, label: Aço }
+            - { name: couro, label: Couro }
+            - { name: borracha, label: Borracha }
+            - { name: tecido, label: Tecido / NATO }
+            - { name: titanio, label: Titânio }
+      - name: estado
+        label: Estado de conservação
+        type: select
+        options:
+          values:
+            - { name: novo, label: Novo, sem uso }
+            - { name: excelente, label: Excelente }
+            - { name: muito-bom, label: Muito bom }
+            - { name: bom, label: Bom }
+      - name: acompanha
+        label: Acompanha
+        type: select
+        options:
+          multiple: true
+          values:
+            - { name: caixa, label: Caixa original }
+            - { name: papeis, label: Papéis / certificado }
+            - { name: manual, label: Manual }
+            - { name: pulseira-extra, label: Pulseira extra }
+
+  # ---------------- Textos e configurações do site ----------------
+  - name: site
+    label: Textos do site
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: url
+        label: Endereço do site (ex. https://www.bmjapanwatches.com.br)
+        type: string
+        required: true
+      - name: whatsapp
+        label: WhatsApp (55 + DDD + número, só algarismos)
+        type: string
+      - name: instagram
+        label: Instagram (@ do perfil)
+        type: string
+      - name: descricao_pt
+        label: Descrição da loja (português — Google e rodapé)
+        type: text
+      - name: descricao_en
+        label: Descrição da loja (inglês)
+        type: text
+      - name: hero
+        label: Topo da página
+        type: object
+        fields:
+          - name: imagem
+            label: Foto do topo
+            type: image
+          - name: etiqueta_pt
+            label: Frase acima do título (português)
+            type: string
+          - name: etiqueta_en
+            label: Frase acima do título (inglês)
+            type: string
+          - name: titulo_pt
+            label: Título (português) — Enter quebra linha, *asteriscos* deixam em itálico
+            type: text
+          - name: titulo_en
+            label: Título (inglês)
+            type: text
+          - name: texto_pt
+            label: Texto (português)
+            type: text
+          - name: texto_en
+            label: Texto (inglês)
+            type: text
+      - name: diferenciais
+        label: Diferenciais (faixa abaixo da vitrine)
+        type: object
+        list:
+          max: 4
+        fields:
+          - name: valor_pt
+            label: Destaque (português)
+            type: string
+          - name: valor_en
+            label: Destaque (inglês)
+            type: string
+          - name: rotulo_pt
+            label: Legenda (português)
+            type: string
+          - name: rotulo_en
+            label: Legenda (inglês)
+            type: string

@@ -1,2 +1,5 @@
 # Configuração local do editor/preview — não faz parte do site
 .claude/
+
+# Site gerado pelo build.js (o Amplify gera de novo a cada publicação)
+dist/

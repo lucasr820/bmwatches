@@ -1,0 +1,22 @@
+{
+  "modelo": "Profondeur 300",
+  "marca": "Orsini Genève",
+  "preco": 61200,
+  "status": "reservado",
+  "etiqueta": "",
+  "ordem": 3,
+  "fotos": [
+    "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1200&q=80"
+  ],
+  "descricao_pt": "Relógio de mergulho com resistência a 300 metros, luneta giratória e pulseira de borracha. Robusto e elegante.",
+  "descricao_en": "Dive watch rated to 300 metres, with a rotating bezel and rubber strap. Rugged and elegant.",
+  "referencia": "OG-P300",
+  "ano": "2020",
+  "diametro": 41,
+  "material": "aco",
+  "movimento": "automatico",
+  "pulseira": "borracha",
+  "estado": "excelente",
+  "acompanha": ["caixa", "papeis", "manual"]
+}

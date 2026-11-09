@@ -320,11 +320,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 /* Card: preto fosco, sem bordas pesadas, só uma linha quase invisível.
-   O card inteiro é um link que abre o WhatsApp com a mensagem pronta. */
+   Foto e textos levam à página do relógio; o botão abre o WhatsApp. */
 .card {
   position: relative;
   display: block;
-  cursor: pointer;
   background: var(--charcoal);
   outline: 1px solid rgba(255, 255, 255, 0.04);
   outline-offset: -1px;
@@ -357,7 +356,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Fallback caso a imagem externa não carregue: mostrador desenhado em CSS */
 .card__img.is-broken,
 .hero__img.is-broken { visibility: hidden; }
-.card__media.has-fallback::before {
+.card__media.has-fallback::before,
+.gallery__main.has-fallback::before,
+.hero__media.has-fallback::before {
   content: "";
   position: absolute; inset: 22%;
   border: 1px solid var(--smoke);
@@ -382,6 +383,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   content: "";
   position: absolute; inset: auto 0 0 0; height: 45%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s var(--ease);
 }
@@ -404,7 +406,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background 0.3s, color 0.3s;
 }
 .card:hover .card__buy,
-.card:focus-visible .card__buy { opacity: 1; transform: none; }
+.card:focus-within .card__buy { opacity: 1; transform: none; }
 .card__buy:hover { background: var(--black); color: var(--white); }
 .card__buy svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -448,7 +450,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* marca + atendimento */
+  grid-template-columns: 2fr 1fr 1fr; /* marca + navegação + contato */
   gap: 3rem;
   padding-bottom: 4rem;
   border-bottom: 1px solid var(--smoke);
@@ -492,6 +494,229 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .footer__bottom a:hover { color: var(--white); }
 
 /* ==========================================================
+   8b. SELETOR DE IDIOMA
+   ========================================================== */
+.lang {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--ash);
+}
+.lang__item { padding: 0.35rem 0.1rem; color: var(--ash); transition: color 0.3s var(--ease); }
+.lang a.lang__item:hover, .lang__item.is-active { color: var(--white); }
+.lang__item.is-active { border-bottom: 1px solid var(--white); }
+.lang__sep { color: var(--smoke); }
+
+/* ==========================================================
+   8c. CARDS: links, selos de status e peça vendida
+   ========================================================== */
+.card__cover { display: block; width: 100%; height: 100%; }
+.card__body { color: inherit; }
+.card__tag { pointer-events: none; }
+
+/* Selo de status: Reservado (contorno) / Vendido (branco sólido) */
+.badge {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.badge--reservado { color: var(--white); border: 1px solid var(--white); background: rgba(0, 0, 0, 0.55); }
+.badge--vendido { color: var(--black); background: var(--white); border: 1px solid var(--white); }
+.card__status { position: absolute; top: 1rem; right: 1rem; z-index: 2; }
+
+/* Peça vendida: foto apagada e preço riscado */
+.card.is-vendido .card__img { filter: grayscale(1) contrast(1.1) brightness(0.45); }
+.card.is-vendido:hover .card__img { filter: grayscale(1) contrast(1.2) brightness(0.6); }
+.card__price.is-sold,
+.product__price.is-sold { color: var(--ash); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* Ícone dentro dos botões de WhatsApp */
+.card__buy svg,
+.btn--wa svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ==========================================================
+   8d. BOTÃO FLUTUANTE DO WHATSAPP
+   Círculo branco fixo; no hover expande mostrando "Fale conosco".
+   ========================================================== */
+.wa-float {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 120;
+  display: flex; align-items: center;
+  height: 56px;
+  padding: 0 17px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  animation: floatIn 0.9s var(--ease) 1.2s both;
+  transition: transform 0.3s var(--ease);
+}
+.wa-float:hover { transform: translateY(-3px); }
+.wa-float svg { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Anel que pulsa suavemente para chamar atenção */
+.wa-float::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--white);
+  animation: ring 3s var(--ease) 2.5s infinite;
+  pointer-events: none;
+}
+
+.wa-float__label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: max-width 0.5s var(--ease), margin 0.5s var(--ease);
+}
+.wa-float:hover .wa-float__label,
+.wa-float:focus-visible .wa-float__label { max-width: 180px; margin-left: 0.7rem; }
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.8); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes ring {
+  0%       { opacity: 0.7; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(1.45); }
+}
+
+/* ==========================================================
+   8e. PÁGINA DO RELÓGIO
+   ========================================================== */
+.product { padding: calc(var(--header-h) + 2.5rem) 0 clamp(4rem, 8vw, 7rem); }
+
+.breadcrumb {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.breadcrumb a { transition: color 0.3s var(--ease); }
+.breadcrumb a:hover, .breadcrumb [aria-current] { color: var(--white); }
+
+.product__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+/* Galeria: foto principal fixa enquanto o texto rola ao lado */
+.gallery { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+.gallery__main {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #222 0%, var(--charcoal) 70%);
+  cursor: zoom-in;
+}
+.gallery__main img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.25) brightness(0.9);
+  transition: transform 0.5s var(--ease), opacity 0.22s ease;
+}
+.gallery__main.is-zoomed img { transform: scale(2); }
+.gallery__main img.is-swapping { opacity: 0; }
+.gallery__main.is-vendido img { filter: grayscale(1) contrast(1.1) brightness(0.5); }
+.gallery__badge { position: absolute; top: 1.25rem; left: 1.25rem; z-index: 2; }
+
+.gallery__thumbs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.gallery__thumb {
+  aspect-ratio: 1;
+  overflow: hidden;
+  opacity: 0.4;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  transition: opacity 0.3s var(--ease), outline-color 0.3s var(--ease);
+}
+.gallery__thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2); }
+.gallery__thumb:hover { opacity: 0.75; }
+.gallery__thumb.is-active { opacity: 1; outline-color: var(--white); }
+
+.product__title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.product__meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem;
+  padding-bottom: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--smoke);
+}
+.product__price { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.02em; }
+
+/* Indicador de status com ponto: cheio, vazado ou apagado */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.status-pill::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+.status-pill--reservado::before { background: transparent; border: 1px solid var(--white); box-shadow: none; }
+.status-pill--vendido::before { background: var(--ash); box-shadow: none; }
+
+.product__desc { color: var(--silver); }
+.product__desc p + p { margin-top: 1rem; }
+
+.product__actions { display: flex; flex-direction: column; gap: 0.75rem; margin: 2.25rem 0 1rem; }
+.btn--wa { gap: 0.7rem; }
+.product__note { font-size: 0.82rem; color: var(--ash); }
+
+.specs__title {
+  margin-top: 2.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.specs > div {
+  display: flex; justify-content: space-between; gap: 1.5rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--smoke);
+  font-size: 0.9rem;
+}
+.specs dt { color: var(--ash); }
+.specs dd { text-align: right; }
+
+.related { margin-top: clamp(5rem, 10vw, 8rem); }
+
+/* Página 404 */
+.notfound { min-height: 80vh; display: grid; place-items: center; text-align: center; padding: calc(var(--header-h) + 3rem) 0 4rem; }
+.notfound .section-text { margin: 1rem auto 2.5rem; max-width: 34rem; }
+
+/* ==========================================================
    9. RESPONSIVIDADE
    ========================================================== */
 
@@ -533,9 +758,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .about__stat:nth-child(2) { border-right: 0; }
   .about__stat:nth-child(-n + 2) { border-bottom: 1px solid var(--smoke); }
 
-  /* Em telas de toque não há hover: o botão "Comprar" fica sempre visível */
+  /* Em telas de toque não há hover: o botão do WhatsApp fica sempre visível */
   .card__buy { opacity: 1; transform: none; }
   .card__media::after { opacity: 1; }
+
+  /* Página do relógio: uma coluna, galeria sem fixar */
+  .product__grid { grid-template-columns: 1fr; }
+  .gallery { position: static; }
+  .product__info { text-align: left; }
+
+  .header__actions { gap: 0.5rem; }
 }
 
 @media (max-width: 560px) {
@@ -554,6 +786,5 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
-  .card, [data-reveal], .hero__content, .hero__content > *, .hero__media { opacity: 1; transform: none; }
-  .scroll-progress { display: none; }
+  .card, [data-reveal], .hero__content, .hero__content > *, .hero__media, .wa-float { opacity: 1; transform: none; }  .scroll-progress { display: none; }
 }

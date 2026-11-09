@@ -1,0 +1,22 @@
+{
+  "modelo": "Minimal 38",
+  "marca": "Atelier Kessler",
+  "preco": 29900,
+  "status": "disponivel",
+  "etiqueta": "",
+  "ordem": 6,
+  "fotos": [
+    "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80"
+  ],
+  "descricao_pt": "Design reduzido ao essencial, caixa fina de 38 mm e pulseira de couro. Discreto e versátil.",
+  "descricao_en": "Design pared back to the essentials, a slim 38 mm case and leather strap. Understated and versatile.",
+  "referencia": "AK-M38",
+  "ano": "2023",
+  "diametro": 38,
+  "material": "aco",
+  "movimento": "automatico",
+  "pulseira": "couro",
+  "estado": "novo",
+  "acompanha": ["caixa", "papeis"]
+}

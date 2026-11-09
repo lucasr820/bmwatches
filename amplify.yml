@@ -1,0 +1,12 @@
+# Configuração de build do AWS Amplify Hosting.
+# A cada commit no GitHub, o Amplify roda o gerador e publica a pasta dist/.
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - node build.js
+  artifacts:
+    baseDirectory: dist
+    files:
+      - "**/*"
