@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMJAPANWATCHES — Relógios de Luxo</title>
+  <meta name="description" content="Relógios de luxo importados diretamente do Japão. Peças originais, selecionadas e com procedência." />
+
+  <!-- Ícone da aba (favicon): SVG nítido em qualquer tamanho + PNGs de reserva.
+       apple-touch-icon é usado quando alguém salva o site na tela do iPhone. -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Tipografia: Cormorant Garamond (serifada moderna para títulos) + Inter (sans-serif fina para textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Barra de progresso de leitura: linha branca fina no topo da página -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       1. HEADER
+       Fundo preto, logotipo branco e navegação limpa.
+       ========================================================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <!-- Logotipo tipográfico -->
+      <a href="#" class="logo" aria-label="BMJAPANWATCHES — página inicial">BMJAPAN<span class="logo__sub">WATCHES</span></a>
+
+      <!-- Navegação principal -->
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="#colecao" class="nav__link">Coleção</a></li>
+          <li><a href="#vitrine" class="nav__link">Vitrine</a></li>
+          <li><a href="#sobre" class="nav__link">Importação</a></li>
+          <li><a href="#contato" class="nav__link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <!-- Botão hambúrguer (visível apenas no mobile) -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================
+         2. HERO
+         Fundo escuro total com foto em alto contraste (P&B),
+         tipografia serifada fina e CTA invertido.
+         ========================================================= -->
+    <section class="hero" id="colecao">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="eyebrow">Importados diretamente do Japão</p>
+          <h1 class="hero__title">
+            O tempo,<br />
+            <em>em sua forma</em><br />
+            mais pura.
+          </h1>
+          <p class="hero__text">
+            Relógios de luxo selecionados no mercado japonês, conhecido pela
+            conservação impecável, e entregues no Brasil com procedência.
+          </p>
+          <div class="hero__cta">
+            <!-- CTA invertido: fundo branco / texto preto -->
+            <a href="#vitrine" class="btn btn--light">Explorar Coleção</a>
+            <a href="#sobre" class="btn btn--ghost">Como Importamos</a>
+          </div>
+        </div>
+
+        <!-- Fotografia do relógio em destaque -->
+        <figure class="hero__media">
+          <img
+            src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80"
+            alt="Relógio premium fotografado em alto contraste"
+            class="hero__img"
+            width="1200" height="1200"
+          />
+          <figcaption class="hero__caption">
+            <span>Ref. N-01</span>
+            <span>Automático · 42 mm</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Indicador de rolagem -->
+      <a href="#vitrine" class="scroll-hint" aria-label="Rolar para a vitrine">
+        <span class="scroll-hint__line"></span>
+      </a>
+    </section>
+
+    <!-- =========================================================
+         3. VITRINE — GRID DE PRODUTOS
+         6 cards gerados via JavaScript a partir de um array de dados
+         (ver script.js). O <noscript> garante conteúdo mínimo.
+         ========================================================= -->
+    <section class="showcase" id="vitrine">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">A Vitrine</p>
+          <h2 class="section-title">Peças selecionadas</h2>
+          <p class="section-text">Peças escolhidas uma a uma no Japão, prontas para chegar até você.</p>
+        </header>
+
+        <div class="grid" id="productGrid">
+          <noscript><p class="section-text">Ative o JavaScript para ver a vitrine.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faixa institucional (apoio ao link "Importação"): diferenciais da loja -->
+    <section class="about" id="sobre">
+      <div class="container about__inner">
+        <!-- data-reveal + --d: cada item aparece em sequência (efeito cascata) -->
+        <div class="about__stat" data-reveal style="--d:0ms"><strong>JP → BR</strong><span>Importação direta</span></div>
+        <div class="about__stat" data-reveal style="--d:120ms"><strong>100%</strong><span>Originais verificados</span></div>
+        <div class="about__stat" data-reveal style="--d:240ms"><strong>A+</strong><span>Estado de conservação</span></div>
+        <div class="about__stat" data-reveal style="--d:360ms"><strong>Rastreado</strong><span>Envio com seguro</span></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       4. FOOTER
+       Fundo preto puro, links organizados e ícones line art.
+       ========================================================= -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="footer__grid" data-reveal>
+        <div class="footer__brand">
+          <a href="#" class="logo">BMJAPAN<span class="logo__sub">WATCHES</span></a>
+          <p>Relógios de luxo importados do Japão. Originais, selecionados e com procedência.</p>
+
+          <!-- Ícones sociais vazados (apenas stroke, sem preenchimento) -->
+          <ul class="social" aria-label="Redes sociais">
+            <li>
+              <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" /></svg>
+              </a>
+            </li>
+            <li>
+              <!-- WhatsApp: troque o "#" por https://wa.me/55DDDNUMERO (só números) -->
+              <a href="#" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 20.5 4.8 16.3A8.5 8.5 0 1 1 8 19.4l-4.5 1.1Z" /><path d="M9.2 8.2c-.4 3.6 3 7 6.6 6.6l.7-1.4-1.8-1-1 .8a5 5 0 0 1-2.3-2.3l.8-1-1-1.8-1.4.7" /></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <nav class="footer__col" aria-label="Atendimento">
+          <h3>Atendimento</h3>
+          <ul>
+            <li><a href="#">Garantia</a></li>
+            <li><a href="#">Envio e devoluções</a></li>
+            <li><a href="#">Perguntas frequentes</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> BMJAPANWATCHES. Todos os direitos reservados.</span>
+        <span><a href="#">Privacidade</a> · <a href="#">Termos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
